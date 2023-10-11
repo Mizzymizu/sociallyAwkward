@@ -1,6 +1,4 @@
-const ObjectId = require('mongoose').Types;
 const { Users, Thoughts } = require('../models');
-const { Reactions } = require('../models/Thoughts');
 
 const totalUser = async () => {
     const totalCount = await Users.aggregate()
@@ -85,6 +83,44 @@ module.exports = {
         } catch (err) {
             console.log(err);
             return res.status(400).json(err);
+        }
+    },
+    // Awh, he got a new friend!
+    async addFriend(req, res) {
+        try {
+            const user = Users.findOneAndUpdate(
+                { _id: req.params.usserId },
+                { $addToSet: { friends: req.params.friendId } },
+                { runValidators: true, new: true}
+            );
+
+            if (!user) {
+                return res.status(404).json({ message: 'Yikes, they must be a loner. No user found with this id 8(' })
+            }
+
+            res.json(user)
+        } catch (err) {
+            console.log(err);
+            return res.status(400).json(err);
+        }
+    },
+    // Awh, he lost a friend...
+    async deleteFriend (req, res) {
+        try {
+            const user = Users.findOneAndUpdate(
+                { _id: req.params.userId },
+                { $pull: { friends: req.params.friendId } },
+                { runValidators: true, new: true }
+            )
+
+            if (!user) {
+                return res.status(404).json({ message: 'Aye! You dont have any friends to delete!'})
+            }
+
+            res.json(user)
+        } catch (err) {
+            console.log(err);
+            return res.status(400).json(err)
         }
     }
 }
