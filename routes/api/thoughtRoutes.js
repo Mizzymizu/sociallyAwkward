@@ -1,6 +1,14 @@
 const router = require('express').Router();
 
-const {} = require('../')
+const {
+    getThoughts,
+    getThoughtById,
+    think,
+    rethink,
+    unthink,
+    react,
+    unreact
+} = require('../../controllers/thoughtController')
 
 
 
