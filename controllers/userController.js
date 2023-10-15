@@ -33,7 +33,7 @@ module.exports = {
                 return res.status(404).json({ message: 'Uh oh, SpaghettiO! No user found with this id 8(' })
             }
 
-            res.json({ user })
+            res.json( user )
         } catch (err) {
             console.log(err);
             return res.status(400).json(err);
