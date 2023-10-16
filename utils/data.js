@@ -44,6 +44,17 @@ const thoughtSeeds = [
   "The only person you are destined to become is the person you decide to be.",
 ];
 
+const emailDomains = [
+  "gmail.com",
+  "yahoo.com",
+  "hotmail.com",
+  "aol.com",
+  "msn.com",
+  "comcast.net",
+  "sbcglobal.net",
+  "live.com",
+]
+
 const getRandomArrItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 const getRandomUsername = (int) => {
@@ -65,6 +76,15 @@ const getRandomThought = (int) => {
     }
     return results;
   };
+
+  const getRandomEmail = (init) => {
+    const results = [];
+    for (let i = 0; i < init; i++) {
+      results.push({
+        email: `${getRandomArrItem(userSeeds)}@${getRandomArrItem(emailDomains)}`
+      });
+    } return results;
+  }
   
 
-module.exports = { getRandomUsername, getRandomThought };
+module.exports = { getRandomUsername, getRandomThought, getRandomEmail };
