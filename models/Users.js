@@ -14,10 +14,10 @@ const userSchema = new Schema(
       unique: true,
       required: true,
       // Mongoose email validation
-      validate: {
-        validator: () => Promise.resolve(false),
-        message: 'Email validation has failed, my friend.'
-      }
+      validate: [
+        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+        'Email validation has failed, my friend.'
+      ]
     },
     thoughts: [{
         type: Schema.Types.ObjectId, ref: 'thoughts'

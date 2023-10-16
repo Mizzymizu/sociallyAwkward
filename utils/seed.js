@@ -21,11 +21,11 @@ connection.once('open', async () => {
 
     // Add students to the students array
     for (let i = 0; i < 20; i++ ) {
-        const username = getRandomUsername();
+        const usernames = getRandomUsername();
         const thoughts = getRandomThought();
 
         const user = {
-            username,
+            usernames,
             thoughts
         }
 
